@@ -1,22 +1,25 @@
-import React from 'react';
-// import FeedbackOptions from './Feedback/FeedbackOptions';
-// import Statistics from './Statistics/Statistics';
+import React, { Component } from 'react';
+import {FeedbackOptions} from './Feedback/FeedbackOptions';
+import {Statistics} from './Statistics/Statistics';
 // import Section from './Section/Section';
 
-export const App =()=> {
-  // state = {
-  //   good: 0,
-  //   neutral: 0,
-  //   bad: 0,
-  // };
+class App extends Component {
+  state = {
+    good: 0,
+    neutral: 0,
+    bad: 0,
+  };
 
-  // options = ['Good', 'Neutral', 'Bad'];
 
-  // counterFeedbeck = event => {
-  //   this.setState(prevState => ({
-  //     [event.target.name]: prevState[event.target.name] + 1,
-  //   }));
-  // };
+  
+
+   onLeaveFeedback = (option) => { 
+    this.setState( prevState => ({
+      [option]: prevState[option] + 1,
+    }));
+    console.log(option);
+
+  };
 
 
   // countTotalFeedback = () => {
@@ -32,7 +35,8 @@ export const App =()=> {
   //   );
   // };
 
-
+render(){
+  
     return (
       <div
         style={{
@@ -42,21 +46,16 @@ export const App =()=> {
 
         <div>
           <h1>Feedback</h1>
-          <button type='button'>Good</button>
-          <button type='button'>Neutral</button>
-          <button type='button'>Bad</button>
+        <FeedbackOptions options={['Good', 'Neutral', 'Bad']} onLeaveFeedback={this.onLeaveFeedback}/>
         </div>
 
         <div>
           <h2>Statistics</h2>
-          <ul>
-            <li>Good</li>
-            <li>Neutral</li>
-            <li>Bad</li>
-            <li>Total</li>
-            <li>PositiveStatis</li>
-          </ul>
+          <Statistics good={this.state.good}></Statistics>
         </div>
+
+        <p>{this.state.good}</p>
+        <p>{}</p>
 
         </div>)
 
@@ -69,7 +68,8 @@ export const App =()=> {
         // </Section> */}
         
 
-
+      }
 }
 
 
+export default App;
